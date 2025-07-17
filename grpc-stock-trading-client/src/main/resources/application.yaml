@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: grpc-stock-trading-client
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG
+
+grpc:
+  client:
+    stockService:
+      address: "static://localhost:9090"
+      negotiationType: PLAINTEXT

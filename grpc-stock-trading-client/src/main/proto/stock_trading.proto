@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+
+option java_package = "org.pk.grpc.sts.model";
+
+service StockService {
+    rpc getStockList(StockListFilterRequest) returns (StockList);
+    rpc getStockDetails(StockDetailsRequest) returns (Stock);
+}
+
+message Sector {
+    string sector = 1;
+}
+
+message SubSector {
+    Sector sector = 1;
+    string subSector = 2;
+}
+
+message StockDetails {
+    string symbol = 1;
+    string ISIN = 2;
+    string security = 3;
+    SubSector subSector = 4;
+    string classification = 5;
+    string bseScriptCode = 6;
+    string nseScriptName = 7;
+}
+
+message Stock {
+    string symbol = 1;
+    double price = 2;
+    string lastPriceChanged = 3;
+    StockDetails details = 4;
+}
+
+message StockList {
+    repeated Stock stocks = 1;
+}
+
+message StockListFilterRequest {
+    string symbol = 1;
+}
+
+message StockDetailsRequest {
+    string symbol = 1;
+    string ISIN = 2;
+}
+
+message ErrorResponse {
+    string error = 1;
+}

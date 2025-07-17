@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: grpc-stock-trading-server
+
+grpc:
+  server:
+    port: 8080
+    enable-reflection: true
