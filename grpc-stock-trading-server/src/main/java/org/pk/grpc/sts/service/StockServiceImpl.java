@@ -8,6 +8,8 @@ import org.pk.grpc.sts.DummyStockList;
 import org.pk.grpc.sts.model.*;
 import org.springframework.grpc.server.service.GrpcService;
 
+import java.time.ZonedDateTime;
+
 @GrpcService
 public class StockServiceImpl extends StockServiceGrpc.StockServiceImplBase {
 
@@ -30,5 +32,19 @@ public class StockServiceImpl extends StockServiceGrpc.StockServiceImplBase {
             metadata.put(key, ErrorResponse.newBuilder().setError("Stock not found").build());
             responseObserver.onError(Status.NOT_FOUND.withDescription("Stock not found").asRuntimeException(metadata));
         });
+    }
+
+    @Override
+    public void getStockLivePrice(StockDetailsRequest request, StreamObserver<StockPrice> responseObserver) {
+        for (int i = 0; i <= 10; i++) {
+            StockPrice stockPrice = StockPrice
+                    .newBuilder()
+                    .setPrice(700.0 + i)
+                    .setSymbol("SBI")
+                    .setLastPriceChanged(ZonedDateTime.now().toString())
+                    .build();
+            responseObserver.onNext(stockPrice);
+        }
+        responseObserver.onCompleted();
     }
 }

@@ -1,4 +1,6 @@
 package org.pk.grpc.stc;
 
-public class StockPriceDto {
+import java.time.ZonedDateTime;
+
+public record StockPriceDto(String symbol, double price, ZonedDateTime time) {
 }
