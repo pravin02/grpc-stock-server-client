@@ -25,4 +25,6 @@ If you manually switch to a different parent and actually want the inheritance, 
 
 curl --location 'localhost:8080/v1/stocks/SBI'
 
-curl --location 'localhost:8080/v1/stocks?symbol=SBI'
+curl --location 'localhost:8080/v1/stocks?symbol=SBI' -- Unary example
+
+curl --location 'localhost:8080/v1/stocks/live/price/SBI' -- Server streaming example
