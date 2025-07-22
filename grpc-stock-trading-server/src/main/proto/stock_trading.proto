@@ -7,6 +7,7 @@ option java_package = "org.pk.grpc.sts.model";
 service StockService {
   rpc getStockList(StockListFilterRequest) returns (StockList);
   rpc getStockDetails(StockDetailsRequest) returns (Stock);
+  rpc getStockLivePrice(StockDetailsRequest) returns(stream StockPrice);
 }
 
 message Sector {
@@ -33,6 +34,12 @@ message Stock {
   double price = 2;
   string lastPriceChanged = 3;
   StockDetails details = 4;
+}
+
+message StockPrice {
+  string symbol = 1;
+  double price = 2;
+  string lastPriceChanged = 3;
 }
 
 message StockList {
